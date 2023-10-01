@@ -40,7 +40,7 @@ class HeaderDataCollectionTest extends AbstractKleinTest
      * @param array $sample_data
      * @return void
      */
-    protected function prepareSampleData(&$sample_data)
+    protected static function prepareSampleData(&$sample_data)
     {
         if (isset($sample_data[static::$nonexistent_key])) {
             unset($sample_data[static::$nonexistent_key]);
@@ -48,7 +48,7 @@ class HeaderDataCollectionTest extends AbstractKleinTest
 
         foreach ($sample_data as &$data) {
             if (is_array($data)) {
-                $this->prepareSampleData($data);
+                self::prepareSampleData($data);
             }
         }
         reset($sample_data);
@@ -59,7 +59,7 @@ class HeaderDataCollectionTest extends AbstractKleinTest
      *
      * @return array
      */
-    public function sampleDataProvider()
+    public static function sampleDataProvider()
     {
         // Populate our sample data
         $sample_data = array(
@@ -78,7 +78,7 @@ class HeaderDataCollectionTest extends AbstractKleinTest
             'ACCEPT_CHARSET' => 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
         );
 
-        $this->prepareSampleData($sample_data);
+        self::prepareSampleData($sample_data);
 
         $data_collection = new HeaderDataCollection($sample_data);
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Klein (klein.php) - A fast & flexible router for PHP
  *
@@ -30,7 +31,7 @@ class RouteCollectionTest extends AbstractKleinTest
      *
      * @return array
      */
-    public function sampleDataProvider()
+    public static function sampleDataProvider()
     {
         $sample_route = new Route(
             function () {
