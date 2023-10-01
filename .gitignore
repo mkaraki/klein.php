@@ -7,3 +7,4 @@ docs/
 
 # Auto-generated code coverage report
 report/
+.phpunit.result.cache
