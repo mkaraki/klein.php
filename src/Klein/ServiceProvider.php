@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Klein (klein.php) - A fast & flexible router for PHP
  *
@@ -385,6 +386,25 @@ class ServiceProvider
         return $this->validate($this->request->param($param), $err);
     }
 
+    /**
+     * Returns the request object
+     *
+     * @return Request|null
+     */
+    public function getRequest()
+    {
+        return $this->request;
+    }
+
+    /**
+     * Returns the response object
+     *
+     * @return AbstractResponse|null
+     */
+    public function getResponse()
+    {
+        return $this->response;
+    }
 
     /**
      * Magic "__isset" method

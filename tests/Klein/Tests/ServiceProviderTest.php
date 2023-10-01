@@ -38,8 +38,8 @@ class ServiceProviderTest extends AbstractKleinTest
         $service = new ServiceProvider();
 
         // Make sure our attributes are first null
-        $this->assertAttributeEquals(null, 'request', $service);
-        $this->assertAttributeEquals(null, 'response', $service);
+        $this->assertNull($service->getRequest());
+        $this->assertNull($service->getResponse());
 
         // New service with injected dependencies
         $service = new ServiceProvider(
@@ -48,8 +48,8 @@ class ServiceProviderTest extends AbstractKleinTest
         );
 
         // Make sure our attributes are set
-        $this->assertAttributeEquals($request, 'request', $service);
-        $this->assertAttributeEquals($response, 'response', $service);
+        $this->assertEquals($request, $service->getRequest());
+        $this->assertEquals($response, $service->getResponse());
     }
 
     public function testBinder()
@@ -57,8 +57,8 @@ class ServiceProviderTest extends AbstractKleinTest
         $service = new ServiceProvider();
 
         // Make sure our attributes are first null
-        $this->assertAttributeEquals(null, 'request', $service);
-        $this->assertAttributeEquals(null, 'response', $service);
+        $this->assertNull($service->getRequest());
+        $this->assertNull($service->getResponse());
 
         // New service with injected dependencies
         $return_val = $service->bind(
@@ -67,8 +67,8 @@ class ServiceProviderTest extends AbstractKleinTest
         );
 
         // Make sure our attributes are set
-        $this->assertAttributeEquals($request, 'request', $service);
-        $this->assertAttributeEquals($response, 'response', $service);
+        $this->assertEquals($request, $service->getRequest());
+        $this->assertEquals($response, $service->getResponse());
 
         // Make sure we're chainable
         $this->assertEquals($service, $return_val);

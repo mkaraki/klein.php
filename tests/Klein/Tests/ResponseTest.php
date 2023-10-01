@@ -22,9 +22,9 @@ use Klein\ResponseCookie;
 use Klein\Tests\Mocks\MockRequestFactory;
 
 /**
- * ResponsesTest
+ * ResponseTest
  */
-class ResponsesTest extends AbstractKleinTest
+class ResponseTest extends AbstractKleinTest
 {
 
     public function testProtocolVersionGetSet()
@@ -36,7 +36,7 @@ class ResponsesTest extends AbstractKleinTest
 
         $this->assertNotNull($response->protocolVersion());
         $this->assertIsString($response->protocolVersion());
-        $this->assertRegExp($version_reg_ex, $response->protocolVersion());
+        $this->assertMatchesRegularExpression($version_reg_ex, $response->protocolVersion());
 
         // Set in method
         $response = new Response();
@@ -198,7 +198,7 @@ class ResponsesTest extends AbstractKleinTest
 
         $response->sendHeaders();
 
-        $this->expectOutputString(null);
+        $this->expectOutputString('');
     }
 
     /**
@@ -221,7 +221,7 @@ class ResponsesTest extends AbstractKleinTest
 
         $response->sendCookies();
 
-        $this->expectOutputString(null);
+        $this->expectOutputString('');
     }
 
     /**
@@ -254,6 +254,8 @@ class ResponsesTest extends AbstractKleinTest
      */
     public function testSendWhenAlreadySent()
     {
+        $this->expectException(\Klein\Exceptions\ResponseAlreadySentException::class);
+
         $response = new Response();
         $response->send();
 
@@ -419,7 +421,7 @@ class ResponsesTest extends AbstractKleinTest
 
         $response->dump('test');
 
-        $this->assertContains('test', $response->body());
+        $this->assertStringContainsString('test', $response->body());
     }
 
     public function testDumpArray()
@@ -461,7 +463,7 @@ class ResponsesTest extends AbstractKleinTest
             filesize(__FILE__),
             $this->klein_app->response()->headers()->get('Content-Length')
         );
-        $this->assertContains(
+        $this->assertStringContainsString(
             $file_name,
             $this->klein_app->response()->headers()->get('Content-Disposition')
         );
@@ -500,6 +502,8 @@ class ResponsesTest extends AbstractKleinTest
      */
     public function testFileSendWhenAlreadySent()
     {
+        $this->expectException(\Klein\Exceptions\ResponseAlreadySentException::class);
+
         // Expect our output to match our file
         $this->expectOutputString(
             file_get_contents(__FILE__)
@@ -518,6 +522,8 @@ class ResponsesTest extends AbstractKleinTest
      */
     public function testFileSendWithNonExistentFile()
     {
+        $this->expectException(\RuntimeException::class);
+
         // Ignore the file warning
         $old_error_val = error_reporting();
         error_reporting(E_ALL ^ E_WARNING);
