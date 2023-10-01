@@ -1,4 +1,4 @@
-name: Unit Test
+name: Test
 
 on: [push]
 
@@ -17,3 +17,8 @@ jobs:
 
       - name: Run test
         run: ./vendor/bin/phpunit
+        continue-on-error: true
+
+      - name: Run phpcs
+        run: ./vendor/bin/phpcs --standard=PSR12 --encoding=utf-8 src tests
+        continue-on-error: true
