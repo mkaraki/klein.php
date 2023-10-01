@@ -79,7 +79,7 @@ class ServiceProviderTest extends AbstractKleinTest
     {
         $service = new ServiceProvider();
 
-        $this->assertInternalType('object', $service->sharedData());
+        $this->assertIsObject($service->sharedData());
         $this->assertTrue($service->sharedData() instanceof DataCollection);
     }
 

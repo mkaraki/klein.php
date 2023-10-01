@@ -370,7 +370,7 @@ class KleinTest extends AbstractKleinTest
 
         $this->klein_app->dispatch();
 
-        $this->expectOutputString(null);
+        $this->expectOutputString('');
     }
 
     /**

@@ -88,7 +88,7 @@ class ResponsesTest extends AbstractKleinTest
     {
         $response = new Response();
 
-        $this->assertInternalType('object', $response->status());
+        $this->assertIsObject($response->status());
         $this->assertTrue($response->status() instanceof HttpStatus);
     }
 
@@ -96,7 +96,7 @@ class ResponsesTest extends AbstractKleinTest
     {
         $response = new Response();
 
-        $this->assertInternalType('object', $response->headers());
+        $this->assertIsObject($response->headers());
         $this->assertTrue($response->headers() instanceof HeaderDataCollection);
     }
 
@@ -104,7 +104,7 @@ class ResponsesTest extends AbstractKleinTest
     {
         $response = new Response();
 
-        $this->assertInternalType('object', $response->cookies());
+        $this->assertIsObject($response->cookies());
         $this->assertTrue($response->cookies() instanceof ResponseCookieDataCollection);
     }
 
