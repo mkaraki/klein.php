@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Klein (klein.php) - A fast & flexible router for PHP
  *
@@ -356,11 +357,11 @@ class ServiceProviderTest extends AbstractKleinTest
                 $service->sharedData()->set('name', 'should be overwritten');
 
                 // Set our layout
-                $service->layout(__DIR__.'/views/layout.php');
+                $service->layout(__DIR__ . '/views/layout.php');
 
                 // Render our view, and pass some MORE data
                 $service->render(
-                    __DIR__.'/views/test.php',
+                    __DIR__ . '/views/test.php',
                     $test_data
                 );
             }
@@ -370,9 +371,9 @@ class ServiceProviderTest extends AbstractKleinTest
 
         $this->expectOutputString(
             '<h1>About</h1>' . PHP_EOL
-            .'My name is Trevor Suarez.' . PHP_EOL
-            .'WOOT!' . PHP_EOL
-            .'<div>footer</div>' . PHP_EOL
+                . 'My name is Trevor Suarez.' . PHP_EOL
+                . 'WOOT!' . PHP_EOL
+                . '<div>footer</div>' . PHP_EOL
         );
     }
 
@@ -393,11 +394,11 @@ class ServiceProviderTest extends AbstractKleinTest
                 $service->sharedData()->set('name', 'should be overwritten');
 
                 // Set our layout
-                $service->layout(__DIR__.'/views/layout.php');
+                $service->layout(__DIR__ . '/views/layout.php');
 
                 // Render our view, and pass some MORE data
                 $service->render(
-                    __DIR__.'/views/test.php',
+                    __DIR__ . '/views/test.php',
                     $test_data
                 );
             }
@@ -407,9 +408,9 @@ class ServiceProviderTest extends AbstractKleinTest
 
         $this->expectOutputString(
             '<h1>About</h1>' . PHP_EOL
-            .'My name is Trevor Suarez.' . PHP_EOL
-            .'WOOT!' . PHP_EOL
-            .'<div>footer</div>' . PHP_EOL
+                . 'My name is Trevor Suarez.' . PHP_EOL
+                . 'WOOT!' . PHP_EOL
+                . '<div>footer</div>' . PHP_EOL
         );
     }
 
@@ -424,11 +425,11 @@ class ServiceProviderTest extends AbstractKleinTest
         $this->klein_app->respond(
             function ($request, $response, $service) use ($test_data) {
                 // Set our layout
-                $service->layout(__DIR__.'/views/layout.php');
+                $service->layout(__DIR__ . '/views/layout.php');
 
                 // Render our view, and pass some MORE data
                 $service->partial(
-                    __DIR__.'/views/test.php',
+                    __DIR__ . '/views/test.php',
                     $test_data
                 );
             }
@@ -439,7 +440,7 @@ class ServiceProviderTest extends AbstractKleinTest
         // Make sure the layout doesn't get included
         $this->expectOutputString(
             'My name is Trevor Suarez.' . PHP_EOL
-            .'WOOT!' . PHP_EOL
+                . 'WOOT!' . PHP_EOL
         );
     }
 
@@ -466,6 +467,8 @@ class ServiceProviderTest extends AbstractKleinTest
      */
     public function testValidate()
     {
+        $this->expectException(\Klein\Exceptions\ValidationException::class);
+
         $this->klein_app->onError(
             function ($a, $b, $c, $exception) {
                 throw $exception;
@@ -486,6 +489,8 @@ class ServiceProviderTest extends AbstractKleinTest
      */
     public function testValidateParam()
     {
+        $this->expectException(\Klein\Exceptions\ValidationException::class);
+
         $this->klein_app->onError(
             function ($a, $b, $c, $exception) {
                 throw $exception;

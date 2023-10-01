@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Klein (klein.php) - A fast & flexible router for PHP
  *
@@ -66,7 +67,7 @@ class HeaderDataCollectionTest extends AbstractKleinTest
             'CONNECTION' => 'keep-alive',
             'CONTENT_LENGTH' => '137',
             'USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.31'
-                .' (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31',
+                . ' (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31',
             'CACHE_CONTROL' => 'no-cache',
             'ORIGIN' => 'chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm',
             'AUTHORIZATION' => 'Basic MTIzOjQ1Ng==',
@@ -105,7 +106,7 @@ class HeaderDataCollectionTest extends AbstractKleinTest
     {
         $data_collection = new HeaderDataCollection();
 
-        $this->assertInternalType('int', $data_collection->getNormalization());
+        $this->assertIsInt($data_collection->getNormalization());
 
         $data_collection->setNormalization(
             HeaderDataCollection::NORMALIZE_TRIM & HeaderDataCollection::NORMALIZE_CASE

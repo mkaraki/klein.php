@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Klein (klein.php) - A fast & flexible router for PHP
  *
@@ -12,6 +13,9 @@
 namespace Klein\Tests;
 
 use Klein\App;
+use \Klein\Exceptions\UnknownServiceException;
+use \Klein\Exceptions\DuplicateServiceException;
+
 
 /**
  * AppTest
@@ -75,6 +79,8 @@ class AppTest extends AbstractKleinTest
      */
     public function testGetBadMethod()
     {
+        $this->expectException(\Klein\Exceptions\UnknownServiceException::class);
+
         $app = new App();
         $app->random_thing_that_doesnt_exist;
     }
@@ -98,6 +104,8 @@ class AppTest extends AbstractKleinTest
      */
     public function testCallBadMethod()
     {
+        $this->expectException(\BadMethodCallException::class);
+
         $app = new App();
         $app->random_thing_that_doesnt_exist();
     }
@@ -108,6 +116,8 @@ class AppTest extends AbstractKleinTest
      */
     public function testRegisterDuplicateMethod(array $args)
     {
+        $this->expectException(\Klein\Exceptions\DuplicateServiceException::class);
+
         // Get our vars from our args
         extract($args);
 

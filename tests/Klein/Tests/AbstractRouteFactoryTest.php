@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Klein (klein.php) - A fast & flexible router for PHP
  *
@@ -11,8 +12,8 @@
 
 namespace Klein\Tests;
 
-use Klein\AbstractRouteFactory;
-use Klein\Route;
+use \Klein\AbstractRouteFactory;
+use \Klein\Route;
 
 /**
  * AbstractRouteFactoryTest
@@ -40,8 +41,8 @@ class AbstractRouteFactoryTest extends AbstractKleinTest
     {
         $methods_to_mock = $methods_to_mock ?: $this->getDefaultMethodsToMock();
 
-        return $this->getMockBuilder('\Klein\AbstractRouteFactory')
-            ->setMethods($methods_to_mock);
+        return $this->getMockBuilder(\Klein\AbstractRouteFactory::class)
+            ->onlyMethods($methods_to_mock);
     }
 
 

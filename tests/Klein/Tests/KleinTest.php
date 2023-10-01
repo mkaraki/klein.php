@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Klein (klein.php) - A fast & flexible router for PHP
  *
@@ -157,7 +158,7 @@ class KleinTest extends AbstractKleinTest
     {
         // Test data
         $test_namespace = '/test/namespace';
-        $test_routes_include = __DIR__ .'/routes/random.php';
+        $test_routes_include = __DIR__ . '/routes/random.php';
 
         // Test file include
         $this->assertEmpty($this->klein_app->routes()->all());
@@ -271,7 +272,7 @@ class KleinTest extends AbstractKleinTest
                 $expected_arguments['methods_matched'] = $methods_matched;
                 $expected_arguments['exception'] = $exception;
 
-                $klein->response()->body($code .' error');
+                $klein->response()->body($code . ' error');
             }
         );
 
@@ -377,6 +378,8 @@ class KleinTest extends AbstractKleinTest
      */
     public function testAfterDispatchWithCallableThatThrowsException()
     {
+        $this->expectException(\Klein\Exceptions\UnhandledException::class);
+
         $this->klein_app->afterDispatch(
             function ($klein) {
                 throw new Exception('testing');
@@ -396,6 +399,8 @@ class KleinTest extends AbstractKleinTest
      */
     public function testErrorsWithNoCallbacks()
     {
+        $this->expectException(\Klein\Exceptions\UnhandledException::class);
+
         $this->klein_app->respond(
             function ($request, $response, $service) {
                 throw new Exception('testing');

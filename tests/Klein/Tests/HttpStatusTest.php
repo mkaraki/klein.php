@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Klein (klein.php) - A fast & flexible router for PHP
  *
@@ -14,9 +15,9 @@ namespace Klein\Tests;
 use Klein\HttpStatus;
 
 /**
- * HttpStatusTests
+ * HttpStatusTest
  */
-class HttpStatusTests extends AbstractKleinTest
+class HttpStatusTest extends AbstractKleinTest
 {
 
     public function testStaticMessageFromCode()

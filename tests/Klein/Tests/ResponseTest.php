@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Klein (klein.php) - A fast & flexible router for PHP
  *
@@ -34,7 +35,7 @@ class ResponsesTest extends AbstractKleinTest
         $response = new Response();
 
         $this->assertNotNull($response->protocolVersion());
-        $this->assertInternalType('string', $response->protocolVersion());
+        $this->assertIsString($response->protocolVersion());
         $this->assertRegExp($version_reg_ex, $response->protocolVersion());
 
         // Set in method
@@ -69,7 +70,7 @@ class ResponsesTest extends AbstractKleinTest
         $response = new Response();
 
         $this->assertNotNull($response->code());
-        $this->assertInternalType('int', $response->code());
+        $this->assertIsInt($response->code());
 
         // Code set in constructor
         $response = new Response(null, 503);
@@ -294,12 +295,12 @@ class ResponsesTest extends AbstractKleinTest
         $response->chunk($content[2]);
 
         $this->expectOutputString(
-            dechex(strlen($content[0]))."\r\n"
-            ."$content[0]\r\n"
-            .dechex(strlen($content[1]))."\r\n"
-            ."$content[1]\r\n"
-            .dechex(strlen($content[2]))."\r\n"
-            ."$content[2]\r\n"
+            dechex(strlen($content[0])) . "\r\n"
+                . "$content[0]\r\n"
+                . dechex(strlen($content[1])) . "\r\n"
+                . "$content[1]\r\n"
+                . dechex(strlen($content[2])) . "\r\n"
+                . "$content[2]\r\n"
         );
     }
 
@@ -607,7 +608,7 @@ class ResponsesTest extends AbstractKleinTest
 
         // Expect our output to match our json encoded test object
         $this->expectOutputString(
-            'dogma('. json_encode($test_object) .');'
+            'dogma(' . json_encode($test_object) . ');'
         );
 
         // Assert headers were passed

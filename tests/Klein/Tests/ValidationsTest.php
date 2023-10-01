@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Klein (klein.php) - A fast & flexible router for PHP
  *
@@ -24,7 +25,7 @@ use Klein\Validator;
 class ValidationsTest extends AbstractKleinTest
 {
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -838,6 +839,8 @@ class ValidationsTest extends AbstractKleinTest
      */
     public function testValidatorThatDoesntExist()
     {
+        $this->expectException(\BadMethodCallException::class);
+
         $result = $this->klein_app->service()->validateParam('12')
             ->isALongNameOfAThingThatDoesntExist();
     }
