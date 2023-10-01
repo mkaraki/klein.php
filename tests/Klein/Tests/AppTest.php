@@ -48,6 +48,8 @@ class AppTest extends AbstractKleinTest
 
     public function testRegisterFiller()
     {
+        $this->expectNotToPerformAssertions();
+
         $func_name = 'yay_func';
 
         $app = new App();

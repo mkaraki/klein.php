@@ -800,6 +800,8 @@ class ValidationsTest extends AbstractKleinTest
 
     public function testCustomValidatorWithManyArgs()
     {
+        $this->expectNotToPerformAssertions();
+
         // Add our custom validator
         $this->klein_app->service()->addValidator(
             'booleanEqual',
