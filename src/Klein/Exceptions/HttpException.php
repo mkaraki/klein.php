@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Klein (klein.php) - A fast & flexible router for PHP
  *
@@ -33,6 +34,6 @@ class HttpException extends RuntimeException implements HttpExceptionInterface
      */
     public static function createFromCode($code)
     {
-        return new static(null, (int) $code);
+        return new static('', (int) $code);
     }
 }
