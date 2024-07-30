@@ -28,6 +28,7 @@ class HeaderDataCollection extends DataCollection
      *
      * Don't normalize
      *
+     * @var int
      * @type int
      */
     const NORMALIZE_NONE = 0;
@@ -37,6 +38,7 @@ class HeaderDataCollection extends DataCollection
      *
      * Normalize the outer whitespace of the header
      *
+     * @var int
      * @type int
      */
     const NORMALIZE_TRIM = 1;
@@ -46,6 +48,7 @@ class HeaderDataCollection extends DataCollection
      *
      * Normalize the delimiters of the header
      *
+     * @var int
      * @type int
      */
     const NORMALIZE_DELIMITERS = 2;
@@ -55,6 +58,7 @@ class HeaderDataCollection extends DataCollection
      *
      * Normalize the case of the header
      *
+     * @var int
      * @type int
      */
     const NORMALIZE_CASE = 4;
@@ -64,6 +68,7 @@ class HeaderDataCollection extends DataCollection
      *
      * Normalize the header into canonical format
      *
+     * @var int
      * @type int
      */
     const NORMALIZE_CANONICAL = 8;
@@ -73,6 +78,7 @@ class HeaderDataCollection extends DataCollection
      *
      * Normalize using all normalization techniques
      *
+     * @var int
      * @type int
      */
     const NORMALIZE_ALL = -1;
@@ -86,9 +92,10 @@ class HeaderDataCollection extends DataCollection
      * The header key normalization technique/style to
      * use when accessing headers in the collection
      *
+     * @var int
      * @type int
      */
-    protected $normalization = self::NORMALIZE_ALL;
+    protected int $normalization = self::NORMALIZE_ALL;
 
 
     /**
@@ -102,9 +109,9 @@ class HeaderDataCollection extends DataCollection
      * @param array $headers        The headers of this collection
      * @param int $normalization    The header key normalization technique/style to use
      */
-    public function __construct(array $headers = array(), $normalization = self::NORMALIZE_ALL)
+    public function __construct(array $headers = array(), int $normalization = self::NORMALIZE_ALL)
     {
-        $this->normalization = (int) $normalization;
+        $this->normalization = $normalization;
 
         foreach ($headers as $key => $value) {
             $this->set($key, $value);
@@ -127,9 +134,9 @@ class HeaderDataCollection extends DataCollection
      * @param int $normalization
      * @return HeaderDataCollection
      */
-    public function setNormalization($normalization)
+    public function setNormalization(int $normalization)
     {
-        $this->normalization = (int) $normalization;
+        $this->normalization = $normalization;
 
         return $this;
     }

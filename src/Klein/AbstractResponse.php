@@ -16,6 +16,7 @@ use Klein\DataCollection\ResponseCookieDataCollection;
 use Klein\Exceptions\LockedResponseException;
 use Klein\Exceptions\ResponseAlreadySentException;
 use Klein\ResponseCookie;
+use phpDocumentor\Reflection\Types\Boolean;
 
 /**
  * AbstractResponse
@@ -30,20 +31,23 @@ abstract class AbstractResponse
     /**
      * The default response HTTP status code
      *
+     * @var int
      * @type int
      */
-    protected static $default_status_code = 200;
+    protected static int $default_status_code = 200;
 
     /**
      * The HTTP version of the response
      *
+     * @var string
      * @type string
      */
-    protected $protocol_version = '1.1';
+    protected string $protocol_version = '1.1';
 
     /**
      * The response body
      *
+     * @var string
      * @type string
      */
     protected $body;
@@ -51,6 +55,7 @@ abstract class AbstractResponse
     /**
      * HTTP response status
      *
+     * @var HttpStatus
      * @type HttpStatus
      */
     protected $status;
@@ -58,38 +63,43 @@ abstract class AbstractResponse
     /**
      * HTTP response headers
      *
+     * @var HeaderDataCollection
      * @type HeaderDataCollection
      */
-    protected $headers;
+    protected HeaderDataCollection $headers;
 
     /**
      * HTTP response cookies
      *
+     * @var ResponseCookieDataCollection
      * @type ResponseCookieDataCollection
      */
-    protected $cookies;
+    protected ResponseCookieDataCollection $cookies;
 
     /**
      * Whether or not the response is "locked" from
      * any further modification
      *
+     * @var boolean
      * @type boolean
      */
-    protected $locked = false;
+    protected bool $locked = false;
 
     /**
      * Whether or not the response has been sent
      *
+     * @var boolean
      * @type boolean
      */
-    protected $sent = false;
+    protected bool $sent = false;
 
     /**
      * Whether the response has been chunked or not
      *
+     * @var boolean
      * @type boolean
      */
-    public $chunked = false;
+    public bool $chunked = false;
 
 
     /**
@@ -107,7 +117,7 @@ abstract class AbstractResponse
      */
     public function __construct($body = '', $status_code = null, array $headers = array())
     {
-        $status_code   = $status_code ?: static::$default_status_code;
+        $status_code   = $status_code === null ? static::$default_status_code : $status_code;
 
         // Set our body and code using our internal methods
         $this->body($body);
@@ -127,13 +137,13 @@ abstract class AbstractResponse
      * @param string $protocol_version
      * @return string|AbstractResponse
      */
-    public function protocolVersion($protocol_version = null)
+    public function protocolVersion(string $protocol_version = null)
     {
         if (null !== $protocol_version) {
             // Require that the response be unlocked before changing it
             $this->requireUnlocked();
 
-            $this->protocol_version = (string) $protocol_version;
+            $this->protocol_version = $protocol_version;
 
             return $this;
         }
@@ -150,13 +160,13 @@ abstract class AbstractResponse
      * @param string $body  The body content string
      * @return string|AbstractResponse
      */
-    public function body($body = null)
+    public function body(string $body = null)
     {
         if (null !== $body) {
             // Require that the response be unlocked before changing it
             $this->requireUnlocked();
 
-            $this->body = (string) $body;
+            $this->body = $body;
 
             return $this;
         }
