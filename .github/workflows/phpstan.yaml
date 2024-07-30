@@ -1,0 +1,26 @@
+name: Test
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate composer.json
+        run: composer validate
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest --dev
+
+      - name: Run test
+        run: ./vendor/bin/phpstan analyse -c .\phpstan.neon --memory-limit 1G --error-format=sarif > results.sarif
+        continue-on-error: true
+
+      - name: Upload Security Analysis results into GitHub Security Code Scanning
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: results.sarif
+          wait-for-processing: true
