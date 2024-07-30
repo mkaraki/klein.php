@@ -1,4 +1,4 @@
-name: Test
+name: PHPStan Security Scan
 
 on: [push]
 
@@ -16,7 +16,7 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-suggest --dev
 
       - name: Run test
-        run: ./vendor/bin/phpstan analyse -c .\phpstan.neon --memory-limit 1G --error-format=sarif > results.sarif
+        run: ./vendor/bin/phpstan analyse -c ./phpstan.neon --memory-limit 1G --error-format=sarif | tee results.sarif
         continue-on-error: true
 
       - name: Upload Security Analysis results into GitHub Security Code Scanning
